@@ -3,14 +3,18 @@ package ashimish.dsandalgoInpractice.recusion;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BitStringNLengthProblem 
+public class GenerateAllPossibleStringOfLengthN 
 {
-	private int array[]=null;
+	
 
-	public void printBinaryOfNLength(int n)
+	private char array[]=null;
+	private char inputCharatcers[]=null;
+
+	public void printBinaryOfNLength(int n,char [] inputCharacters)
 	{
 		//Initialization case 
-		array= new int [n];	
+		array= new char [n];	
+		this.inputCharatcers=inputCharacters;
 		//Initialization case 
 		printBinaryOfNLengthUtil(n);
 	}
@@ -20,22 +24,24 @@ public class BitStringNLengthProblem
 		//Base Case 
 		if(n<1)
 		{
-			for(int e:array)
+			for(char e:array)
 			{
 				System.out.print(" "+e);
 			}
 			System.out.println();
 			return;
 		}
-		array[n-1]=0;
-		printBinaryOfNLengthUtil(n-1);
-		array[n-1]=1;
-		printBinaryOfNLengthUtil(n-1);
+		for(int index=0;index<inputCharatcers.length;index++)
+		{
+			array[n-1]=inputCharatcers[index];
+			printBinaryOfNLengthUtil(n-1);
+		}
 	}
 	
-	public List<String> getListOfAllPossibleBinaryStringOfLengthN(int n)
+	public List<String> getListOfAllPossibleBinaryStringOfLengthN(int n,char [] inputCharacters)
 	{
 		List<String> result= new ArrayList<String>();
+		this.inputCharatcers=inputCharacters;
 		generateBinaryOfNLengthUtil(n,result);
 		return result;
 	}
@@ -45,22 +51,24 @@ public class BitStringNLengthProblem
 		//Initialization case 
 		if(array==null || n>=array.length)
 		{
-			array= new int [n];
+			array= new char [n];
 		}
 		//Base Case 
 		if(n<1)
 		{
 			StringBuilder stringBuilder= new StringBuilder();
-			for(int e:array)
+			for(char e:array)
 			{
 				stringBuilder.append(e);
 			}
 			result.add(stringBuilder.toString());
 			return;
 		}
-		array[n-1]=0;
-		generateBinaryOfNLengthUtil(n-1,result);
-		array[n-1]=1;
-		generateBinaryOfNLengthUtil(n-1,result);	
+		for(int index=0;index<inputCharatcers.length;index++)
+		{
+			array[n-1]=inputCharatcers[index];
+			generateBinaryOfNLengthUtil(n-1,result);
+		}
 	}
+
 }
