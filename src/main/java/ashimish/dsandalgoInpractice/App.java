@@ -2,7 +2,6 @@ package ashimish.dsandalgoInpractice;
 
 /**
  * Hello world!
- *
  */
 public class App 
 {
